@@ -37,42 +37,49 @@
         <div><strong style="font-size: 11pt; font-weight:700;">EVALUACIÓN DE LA DISTRIBUCIÓN DE CARGA</strong></div>
     </div>
 
-    <table style="width: 100%; font-size:9pt; margin-top:0px;">
-        <tr>
-            <td colspan="2">FACULTAD: {{ $data_escuela->facultad }} </td>
-        </tr>
-        <tr>
-            <td>ESCUELA PROFESIONAL: {{ $data_escuela->escuela }}  </td>
-            <td>PROGRAMA DE ESTUDIOS: {{ $data_escuela->programa }} </td>
-        </tr>
-        <tr>
-            <td>AÑO Y SEMESTRE ACADÉMICO: 2024-I</td>
-            <td>N° DE ESTUDIANTES MATRICULADOS: {{ $num_estudiantes }} </td>
-        </tr>
-    </table>
+    <div style="margin-left: -3px;">
+        <table style="width: 100%; font-size:9pt; margin-top:0px;">
+            <tr>
+                <td colspan="2">FACULTAD: {{ $data_escuela->facultad }} </td>
+            </tr>
+            <tr>
+                <td>ESCUELA PROFESIONAL: {{ $data_escuela->escuela }}  </td>
+                <td>PROGRAMA DE ESTUDIOS: {{ $data_escuela->programa }} </td>
+            </tr>
+            <tr>
+                <td>AÑO Y SEMESTRE ACADÉMICO: 2024-I</td>
+                <td>N° DE ESTUDIANTES MATRICULADOS: {{ $num_estudiantes }} </td>
+            </tr>
+        </table>
+    </div>
 
-    <div style="font-size: 8pt; margin-top:5px;">PROGRAMADO</div>
-    <table class="tabla-c1" style="width: 100%; font-size:8pt; ">
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
+        <div><strong style="font-size: 10pt; font-weight:700;">a) CARGA ACADÉMICA DEL PROGRAMA DE ESTUDIOS</strong></div>
+    </div>
+
+    <div style="font-size: 9pt; margin-top:5px;"> <strong style="font-weight: bold;">PROGRAMACIÓN PARA CUMPLIR CON EL PLAN DE ESTUDIOS DEL PROGRAMA </strong></div>
+
+    <table class="tabla-c1" style="width: 100%; font-size:8pt; margin-top:px;">
 
         <tr>
-            <th style="border: 1px solid grey;" rowspan="2"><div style="text-align: center;">Ciclo </div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Grupo A </div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Grupo B </div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Grupo Unico (U) </div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Grupo C/D/E </div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Grupo Dirigido / R.E. </div></th>
+            <th style="border: 1px solid grey;" rowspan="2"><div style="font-weight: bold; text-align: center;">Ciclo </div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight: bold; text-align: center;">Grupo A </div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight: bold; text-align: center;">Grupo B </div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight: bold; text-align: center;">Grupo Unico (U) </div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight: bold; text-align: center;">Grupo C/D/E </div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight: bold; text-align: center;">Grupo Dirigido / R.E. </div></th>
         </tr>
         <tr>
-            <th style="border: 1px solid grey;">N° Cursos</th>
-            <th style="border: 1px solid grey;">N° Horas</th>
-            <th style="border: 1px solid grey;">N° Cursos</th>
-            <th style="border: 1px solid grey;">N° Horas</th>
-            <th style="border: 1px solid grey;">N° Cursos</th>
-            <th style="border: 1px solid grey;">N° Horas</th>
-            <th style="border: 1px solid grey;">N° Cursos</th>
-            <th style="border: 1px solid grey;">N° Horas</th>
-            <th style="border: 1px solid grey;">N° Cursos</th>
-            <th style="border: 1px solid grey;">N° Horas</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Cursos</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Horas</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Cursos</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Horas</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Cursos</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Horas</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Cursos</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Horas</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Cursos</th>
+            <th style="border: 1px solid grey; font-weight: bold;">N° Horas</th>
         </tr>
 
         @php
@@ -246,7 +253,7 @@
         </tr>
     @endforeach
 
-    <tr>
+    <tr style="background: yellow;">
         <td><div style="font-weight: bold; text-align: center; ">Total</div></td>
         <td><div style="font-weight: bold; text-align: center; ">{{$a_cursos }} </div></td>
         <td><div style="font-weight: bold; text-align: center; ">{{$a_horas }} </div></td>
@@ -271,11 +278,11 @@
         @endphp
 
         <tr>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Resumen </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">% Cursos</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">% Horas</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">Resumen </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Cursos </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">% Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">% Horas</div></th>
         </tr>
         <tr>
             <td style="border: 1px solid grey;">Cursos con un solo grupo</td>
@@ -339,37 +346,96 @@
         </tr>
 
 
-        <tr>
-            <td style="border: 1px solid grey;">Total</td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $totalcursos }}</div> </td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $totalhoras }} </div> </td>
-            <td style="border: 1px solid grey;"></td>
-            <td style="border: 1px solid grey;"></td>
+        <tr style="background:">
+            <td style="border: 1px solid grey; font-weight: bold;">Total</td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalcursos }}</div> </td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalhoras }} </div> </td>
+            <td style="border: 1px solid grey; font-weight: bold;"></td>
+            <td style="border: 1px solid grey; font-weight: bold;"></td>
         </tr>
     </table>
 
+
+
+
+    <table class="tabla-c1" style="width: 357px; font-size:8pt; margin-top:20px;">
+        @php
+            $totalcursosadicional = '';
+            $totalhorasadicional = '';
+        @endphp
+
+        <tr>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">PROGRAMACIÓN ADICIONAL </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Cursos </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Horas</div></th> 
+        </tr>
+
+        <tr>
+            <td style="border: 1px solid grey;">Servicio a otros PE</td>
+            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicioaotros[0]->cantidad_cursos }} </div></td>
+            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicioaotros[0]->total_horas }} </div></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid grey;">Prácticas en hospitales</td>
+            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $practicahospitales[0]->cantidad_cursos }} </div></td>
+            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $practicahospitales[0]->cantidad_cursos }} </div></td>
+        </tr>
+
+        <tr style="background:">
+            <td style="border: 1px solid grey; font-weight: bold;">Total</td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalcursosadicional = $servicioaotros[0]->cantidad_cursos + $practicahospitales[0]->cantidad_cursos }}</div> </td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalhorasadicional = $servicioaotros[0]->total_horas + $practicahospitales[0]->total_horas }} </div> </td>
+        </tr>
+    </table>
+
+
+
+
+    <table class="tabla-c1" style="width: 357px; font-size:8pt; margin-top:20px;">
+
+        <tr>
+            <th style="border: 1px solid grey; width:203px;" rowspan="2"><div style="font-weight: bold; text-align: center;">TOTAL</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Cursos </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Horas</div></th> 
+        </tr>
+
+        <tr style="background:">
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalcursos + $totalcursosadicional}}</div> </td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalhoras + $totalhorasadicional}} </div> </td>
+        </tr>
+    </table>
+
+
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
+        <div><strong style="font-size: 10pt; font-weight:700;">b) DISTRIBUCIÓN DE CARGA ACADÉMICA</strong></div>
+    </div>
+
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:1.5rem; margin-bottom:8px;">
+        <div><strong style="font-size: 9pt; font-weight:700;">i) DOCENTES ORDINARIOS</strong></div>
+    </div>
+    
 
     <div style="font-size: 8pt; margin-top:15px;">CATEGORIA PRINCIPALES</div>
     <table class="tabla-c1" style="width: 580px; font-size:8pt; ">
 
         <tr>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Decano</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Autoridades</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Inv. Renacyt</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Promedio</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Docentes </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Decano</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Autoridades</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Inv. Renacyt</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight:bold; text-align: center;">Promedio</div></th>
         </tr>
         <tr>
             <td style="border: 1px solid grey;">
                 <div style="text-align: center;"> {{ $principales->numero_de_docentes }} </div>
             </td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> - </div></td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> - </div></td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> - </div></td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $principales->numero_de_cursos }} </div></td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $principales->numero_de_horas }} </div></td>
+            <td style="border: 1px solid grey;"><div style=" text-align: center;"> - </div></td>
+            <td style="border: 1px solid grey;"><div style=" text-align: center;"> - </div></td>
+            <td style="border: 1px solid grey;"><div style=" text-align: center;"> - </div></td>
+            <td style="border: 1px solid grey;"><div style=" text-align: center;"> {{ $principales->numero_de_cursos }} </div></td>
+            <td style="border: 1px solid grey;"><div style=" text-align: center;"> {{ $principales->numero_de_horas }} </div></td>
             @if($principales->numero_de_docentes != 0)
                 <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ round($principales->numero_de_horas / $principales->numero_de_docentes, 2) }} </div></td>
             @else
@@ -384,13 +450,13 @@
     <table class="tabla-c1" style="width: 580px; font-size:8pt; ">
 
         <tr>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Decano</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Autoridades</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Inv. Renacyt</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Promedio</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Docentes </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Decano</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Autoridades</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Inv. Renacyt</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight:bold; text-align: center;">Promedio</div></th>
         </tr>
         <tr>
             <td style="border: 1px solid grey;">
@@ -416,13 +482,13 @@
     <table class="tabla-c1" style="width: 580px; font-size:8pt; ">
 
         <tr>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Decano</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Autoridades</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Inv. Renacyt</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
-            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Promedio</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Docentes </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Decano</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Autoridades</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">Inv. Renacyt</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight:bold; text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="font-weight:bold; text-align: center;">Promedio</div></th>
         </tr>
         <tr>
             <td style="border: 1px solid grey;">
@@ -439,6 +505,34 @@
                 <td>0</td>
             @endif
             <th style="border: 1px solid grey;"><div style="text-align: center;"> horas/docente </div></th>
+        </tr>
+    </table>
+
+
+
+    <table class="tabla-c1" style="width: 357px; font-size:8pt; margin-top:20px;">
+        @php
+            $totalcursos = $a_cursos + $b_cursos + $otros_cursos + $dirigido_cursos + $unico_cursos;
+            $totalhoras = $a_horas + $b_horas + $otros_horas + $dirigido_horas + $unico_horas;
+        @endphp
+
+        <tr>
+            <th style="border: 1px solid grey; width:133px;" rowspan="2"><div style="font-weight: bold; text-align: center;">TOTAL</div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Docentes</div></th> 
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Cursos </div></th>
+            <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Horas</div></th> 
+        </tr>
+
+        <tr style="background:">
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> 
+                    {{ $principales->numero_de_docentes + $asociados->numero_de_docentes + $auxiliares->numero_de_docentes  }}
+                </div>
+            </td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> 
+                {{ $principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos }}</div> </td>
+            <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;">
+                {{ $principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas }}</div> </td>
+            </div></td>
         </tr>
     </table>
 
@@ -470,9 +564,9 @@
             <th style="border: 1px solid grey;"><div style="text-align: center;"> horas/docente </div></th>
         </tr>            
         <div style="display: none;">
-            {{  $tccontrato += $plaza->numero_de_cursos;   }}
-            {{  $tdcontrato += $plaza->numero_de_docentes;   }}
-            {{  $thcontrato += $plaza->numero_de_horas;   }}
+            {{  $tccontrato += $plaza->numero_de_cursos; }}
+            {{  $tdcontrato += $plaza->numero_de_docentes; }}
+            {{  $thcontrato += $plaza->numero_de_horas; }}
         </div>
         @endforeach
         <tr>
