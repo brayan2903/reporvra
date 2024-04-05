@@ -14,7 +14,7 @@ class ReporteController extends Controller
         WITH cursos_filtrados AS (
             SELECT *
             FROM cursos
-            WHERE prog_id IN ($p)
+            WHERE prog_id IN ($p) and cursos.tipo_alter_salud = 0
         )
         SELECT 
             grupos_y_ciclos.grupo_valor,
@@ -173,7 +173,7 @@ g.grupo, c.curso_ciclo) AS count2_table
 
         $plazas = DB::select("SELECT gc.gc_prog_id,
         d.categoria,
-        COUNT(DISTINCT d.doc_dni) AS numero_de_docentes,
+        COUNT(DISTINCT d.docente_id) AS numero_de_docentes,
         COUNT(DISTINCT c.curso_id, g.grupo) AS numero_de_cursos,
         SUM(c.curso_totalh) AS numero_de_horas
         FROM docentes d
@@ -197,16 +197,17 @@ g.grupo, c.curso_ciclo) AS count2_table
         INNER JOIN program pd ON pd.prog_id = d.prog_id  
         WHERE d.prog_id = $p AND c.prog_id != $p;");
 
-        $practicahospitales = DB::select(" SELECT COUNT(*) AS cantidad_cursos,
-                COALESCE(SUM(c.curso_totalh), 0) AS total_horas
-            FROM docente_curso dc
-            INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
-            INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
-            INNER JOIN cursos c ON c.curso_id = g.curso_id
-            INNER JOIN docentes d ON d.docente_id = dc.docente_id 
-            INNER JOIN program p ON p.prog_id = c.prog_id
-            INNER JOIN program pd ON pd.prog_id = d.prog_id   
-            WHERE c.prog_id = $p AND doc_tip_contra = 3;");
+        $practicahospitales = DB::select(" SELECT 
+        COUNT(c.curso_id) AS cantidad_cursos,
+        SUM(c.curso_totalh) AS total_horas
+    FROM 
+        grupo_curso gc
+    INNER JOIN 
+        grupo g ON gc.cursogc_id = g.grupo_id
+    INNER JOIN 
+        cursos c ON g.curso_id = c.curso_id 
+    WHERE 
+        c.prog_id = $p AND c.tipo_alter_salud = 1;");
 
         $pdf = PDF::loadView('pdf.template', compact('data','principales','asociados','auxiliares','plazas','servicios','data_escuela','num_estudiantes','servicioaotros','practicahospitales'));
         return $pdf->stream('pdf_example.pdf');

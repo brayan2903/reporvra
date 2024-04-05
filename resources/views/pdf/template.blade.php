@@ -378,7 +378,7 @@
         <tr>
             <td style="border: 1px solid grey;">Prácticas en hospitales</td>
             <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $practicahospitales[0]->cantidad_cursos }} </div></td>
-            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $practicahospitales[0]->cantidad_cursos }} </div></td>
+            <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $practicahospitales[0]->total_horas }} </div></td>
         </tr>
 
         <tr style="background:">
@@ -622,7 +622,7 @@
                 </table>
             </td>
             <td style="width: 350px;">
-                <div style="font-size: 8pt;">DIFICIT DE DOCENTES</div>
+                <div style="font-size: 8pt;">DEFICIT DE DOCENTES</div>
                 <table class="tabla-c1" style="width: 280px; font-size:8pt; ">
                     <tr>
                         <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
