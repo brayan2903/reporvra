@@ -639,7 +639,8 @@
                         </td>
                         <td style="border: 1px solid grey;">
                             <div style="text-align: center;">
-                                {{ $totalhoras - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }}
+                                <!-- {{ $totalhoras - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }} -->
+                                 {{ ($totalhoras + $totalhorasadicional) - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }}
                             </div>
                         </td>
                     </tr>
