@@ -383,6 +383,7 @@
 
         <tr style="background:">
             <td style="border: 1px solid grey; font-weight: bold;">Total</td>
+            <!-- <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalcursosadicional = $servicioaotros[0]->cantidad_cursos + $practicahospitales[0]->cantidad_cursos }}</div> </td> -->
             <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalcursosadicional = $servicioaotros[0]->cantidad_cursos + $practicahospitales[0]->cantidad_cursos }}</div> </td>
             <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalhorasadicional = $servicioaotros[0]->total_horas + $practicahospitales[0]->total_horas }} </div> </td>
         </tr>
@@ -631,7 +632,9 @@
                     <tr>
                         <td style="border: 1px solid grey;">
                             <div style="text-align: center;">
-                                {{ $totalcursos - ($principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos) }}
+                                <!-- {{  $principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos  }} -->
+                                {{  ($totalcursos + $totalcursosadicional) - ($principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos)  }}
+
                             </div>
                         </td>
                         <td style="border: 1px solid grey;">
