@@ -608,7 +608,9 @@
         </tr>
     </table>
 
-
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
+        <div><strong style="font-size: 10pt; font-weight:700;">c) EVALUACION DE CARGA ACADEMICA DEL PE</strong></div>
+    </div>
     <table style="margin-left: -3px;  margin-top:10px;">
         <tr>
             <td style="width: 350px">
@@ -651,6 +653,107 @@
                             <div style="text-align: center;">
                                 <!-- {{ $totalhoras - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }} -->
                                  {{ ($totalhoras + $totalhorasadicional) - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+
+            
+
+        </tr>
+
+
+
+    </table>
+
+    <div style="font-size: 8pt; margin-top:15px;">ASIGNACION PRESUPUESTAL TEMPORAL</div>
+    <table class="tabla-c1" style="width: 440px;; font-size:8pt; ">
+        @php
+            $tcapt = 0;
+            $tdapt = 0;
+            $thapt = 0;
+        @endphp
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">Tipo de Contrato</div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Promedio</div></th>
+        </tr>
+        @foreach ($apt as $apt )
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $apt->categoria }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $apt->numero_de_docentes }} </div></th>  
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $apt->numero_de_cursos }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $apt->numero_de_horas }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ round($apt->numero_de_horas/$apt->numero_de_docentes, 2) }}  </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> horas/docente </div></th>
+        </tr>            
+        <div style="display: none;">
+            {{  $tcapt += $apt->numero_de_cursos; }}
+            {{  $tdapt += $apt->numero_de_docentes; }}
+            {{  $thapt += $apt->numero_de_horas; }}
+        </div>
+        @endforeach
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> Total </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $tdapt }} </div></th>  
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $tcapt }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $thapt }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> </div></th>
+        </tr>            
+
+    </table>
+
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
+        <div><strong style="font-size: 10pt; font-weight:700;">d) EVALUACION FINAL DE CARGA ACADEMICA DEL PE </strong></div>
+    </div>
+
+    <table style="margin-left: -3px;  margin-top:10px;">
+        <tr>
+            <td style="width: 350px">
+                <div style="font-size: 8pt;">DISTRIBUCION REALIZADA</div>
+                <table class="tabla-c1" style="width: 280px; font-size:8pt; ">
+                    <tr>
+                        <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
+                        <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas </div></th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid grey;">
+                            <div style="text-align: center;">
+                                {{ ($principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos) + ($tcapt) }}                            
+                            </div>
+                        </td>
+                        <td style="border: 1px solid grey;">
+                            <div style="text-align: center;">
+                                {{ ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) + ($thapt) }}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 350px;">
+                <div style="font-size: 8pt;">DEFICIT DE DOCENTES</div>
+                <table class="tabla-c1" style="width: 280px; font-size:8pt; ">
+                    <tr>
+                        <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
+                        <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas </div></th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid grey;">
+                            <div style="text-align: center;">
+                                <!-- {{  $principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos  }} -->
+                                {{  ($totalcursos + $totalcursosadicional) - (($principales->numero_de_cursos + $asociados->numero_de_cursos + $auxiliares->numero_de_cursos + $tccontrato + $servicios->numero_de_cursos) + ($tcapt))  }}
+
+                            </div>
+                        </td>
+                        <td style="border: 1px solid grey;">
+                            <div style="text-align: center;">
+                                <!-- {{ $totalhoras - ($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) }} -->
+                                 {{ ($totalhoras + $totalhorasadicional) - (($principales->numero_de_horas + $asociados->numero_de_horas + $auxiliares->numero_de_horas + $thcontrato + $servicios->numero_de_horas) + ($thapt)) }}
                             </div>
                         </td>
                     </tr>

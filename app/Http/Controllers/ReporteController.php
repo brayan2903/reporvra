@@ -206,7 +206,7 @@ g.grupo, c.curso_ciclo) AS count2_table
         INNER JOIN program p ON p.prog_id = c.prog_id
         INNER JOIN program pd ON pd.prog_id = d.prog_id  
         
-        WHERE  d.prog_id = $p AND  d.categoria IN ('A1','A2','B1','B2','B3')
+        WHERE  d.prog_id = $p AND d.doc_nombres NOT LIKE'CT%' AND  d.categoria IN ('A1','A2','B1','B2','B3')
         GROUP BY d.categoria 
         ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
 
@@ -234,10 +234,35 @@ g.grupo, c.curso_ciclo) AS count2_table
     WHERE 
         c.prog_id = $p AND c.tipo_alter_salud = 1;");
 
-        $pdf = PDF::loadView('pdf.template', compact('data','principales','asociados','auxiliares','plazas','servicios','data_escuela','num_estudiantes','servicioaotros','practicahospitales'));
-        return $pdf->stream('pdf_example.pdf');
-    }
+        // asignacion presupuestal
 
+$apt = DB::select("SELECT         
+d.categoria,
+COUNT(DISTINCT d.docente_id) AS numero_de_docentes,
+COUNT(DISTINCT c.curso_id, g.grupo) AS numero_de_cursos,
+SUM(c.curso_totalh) AS numero_de_horas
+FROM docentes d
+INNER JOIN docente_curso dc ON d.docente_id = dc.docente_id
+INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
+INNER JOIN grupo g ON gc.cursogc_id = g.grupo_id
+INNER JOIN cursos c ON g.curso_id = c.curso_id
+INNER JOIN program p ON p.prog_id = c.prog_id
+INNER JOIN program pd ON pd.prog_id = d.prog_id  
+WHERE  d.prog_id = $p AND d.doc_nombres LIKE'CT%' AND  d.categoria IN ('A1','A2','B1','B2','B3')
+GROUP BY d.categoria 
+ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
+
+// sin apt
+
+
+        $pdf = PDF::loadView('pdf.template', compact('data','principales','asociados','auxiliares','plazas','servicios','data_escuela','num_estudiantes','servicioaotros','practicahospitales','apt'));
+        return $pdf->stream('pdf_example.pdf');
+
+
+
+
+        
+    }
 
     public function getDocentes($pro, $tipo){
     
