@@ -206,7 +206,7 @@ g.grupo, c.curso_ciclo) AS count2_table
         INNER JOIN program p ON p.prog_id = c.prog_id
         INNER JOIN program pd ON pd.prog_id = d.prog_id  
         
-        WHERE  d.prog_id = 9 AND  d.categoria IN ('A1','A2','B1','B2','B3')
+        WHERE  d.prog_id = $p AND  d.categoria IN ('A1','A2','B1','B2','B3')
         GROUP BY d.categoria 
         ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
 

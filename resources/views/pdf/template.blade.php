@@ -584,6 +584,10 @@
     </table>
 
 
+
+    
+
+
     <div style="font-size: 8pt; margin-top:15px;">DOCENTES SERVICIO</div>
     <table class="tabla-c1" style="width: 350px; font-size:8pt; ">
         <tr>
@@ -654,11 +658,54 @@
 
             </td>
 
+            
+
         </tr>
 
 
 
     </table>
+
+    
+    <!-- <div style="font-size: 8pt; margin-top:15px;">PLAZAS DE CONTRATO</div>
+    <table class="tabla-c1" style="width: 440px;; font-size:8pt; ">
+        @php
+            $tccontrato = 0;
+            $tdcontrato = 0;
+            $thcontrato = 0;
+        @endphp
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">Contrato</div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;">N° Horas</div></th>
+            <th style="border: 1px solid grey;" colspan="2"><div style="text-align: center;">Promedio</div></th>
+        </tr>
+        @foreach ($plazas as $plaza )
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $plaza->categoria }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $plaza->numero_de_docentes }} </div></th>  
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $plaza->numero_de_cursos }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $plaza->numero_de_horas }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ round($plaza->numero_de_horas/$plaza->numero_de_docentes, 2) }}  </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> horas/docente </div></th>
+        </tr>            
+        <div style="display: none;">
+            {{  $tccontrato += $plaza->numero_de_cursos; }}
+            {{  $tdcontrato += $plaza->numero_de_docentes; }}
+            {{  $thcontrato += $plaza->numero_de_horas; }}
+        </div>
+        @endforeach
+        <tr>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> Total </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $tdcontrato }} </div></th>  
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $tccontrato }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $thcontrato }} </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> </div></th>
+            <th style="border: 1px solid grey;"><div style="text-align: center;"> </div></th>
+        </tr>            
+
+    </table> -->
 
 
 
