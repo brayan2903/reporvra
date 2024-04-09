@@ -277,14 +277,16 @@
             $totalhoras = $a_horas + $b_horas + $otros_horas + $dirigido_horas + $unico_horas;
         @endphp
 
-        <tr>
+        <!-- <tr>
             <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">Resumen </div></th>
             <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Cursos </div></th>
             <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">N° Horas</div></th>
             <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">% Cursos</div></th>
             <th style="border: 1px solid grey;"><div style="font-weight: bold; text-align: center;">% Horas</div></th>
-        </tr>
-        <tr>
+        </tr> -->
+
+
+        <!-- <tr>
             <td style="border: 1px solid grey;">Cursos con un solo grupo</td>
             <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $unico_cursos }} </div></td>
             <td style="border: 1px solid grey;"><div style="text-align: center;"> {{ $unico_horas }} </div></td>
@@ -352,7 +354,7 @@
             <td style="border: 1px solid grey; font-weight: bold; background: yellow;"><div style="font-weight: bold; text-align: center;"> {{ $totalhoras }} </div> </td>
             <td style="border: 1px solid grey; font-weight: bold;"></td>
             <td style="border: 1px solid grey; font-weight: bold;"></td>
-        </tr>
+        </tr> -->
     </table>
 
 

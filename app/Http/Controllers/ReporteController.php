@@ -198,8 +198,8 @@ g.grupo, c.curso_ciclo) AS count2_table
         WHERE d.prog_id = $p AND c.prog_id != $p;");
 
         $practicahospitales = DB::select(" SELECT 
-        COUNT(c.curso_id) AS cantidad_cursos,
-        SUM(c.curso_totalh) AS total_horas
+        COALESCE(COUNT(c.curso_id), 0) AS cantidad_cursos,
+        COALESCE(SUM(c.curso_totalh), 0) AS total_horas
     FROM 
         grupo_curso gc
     INNER JOIN 
