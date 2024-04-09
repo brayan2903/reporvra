@@ -150,12 +150,38 @@ g.grupo, c.curso_ciclo) AS count2_table
         $servicios = [];
         // return $data;
 
+        // $ser = DB::select("SELECT 	
+        // COUNT(DISTINCT mc.doc_dni) AS numero_de_docentes,
+        // COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_cursos,
+        // SUM(mc.hxh) AS numero_de_horas,
+        // SUM(mc.curso_totalh) AS numero_de_hcurso
+        // FROM   (SELECT d.doc_dni, c.curso_id, g.grupo, hxh ,c.curso_totalh, d.prog_id AS progdoc, c.prog_id AS progcurso
+        //         FROM docente_curso dc
+        //         INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
+        //         INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
+        //         INNER JOIN cursos c ON c.curso_id = g.curso_id
+        //         INNER JOIN docentes d ON d.docente_id = dc.docente_id 
+        //         INNER JOIN program p ON p.prog_id = c.prog_id
+        //         INNER JOIN program pd ON pd.prog_id = d.prog_id
+        //         INNER JOIN (
+        //             SELECT gch_id, COUNT(*) AS hxh
+        //             FROM horario
+        //             GROUP BY horario.gch_id
+        //         ) AS hxh ON hxh.gch_id = gc.gc_id
+        //         ) as mc WHERE mc.progdoc != $p AND mc.progcurso=$p");
+        // if(count($ser) > 0){ $servicios = $ser[0]; }
+
+
+
+
         $ser = DB::select("SELECT 	
         COUNT(DISTINCT mc.doc_dni) AS numero_de_docentes,
         COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_cursos,
-        SUM(mc.hxh) AS numero_de_horas,
-        SUM(mc.curso_totalh) AS numero_de_hcurso
-        FROM   (SELECT d.doc_dni, c.curso_id, g.grupo, hxh ,c.curso_totalh, d.prog_id AS progdoc, c.prog_id AS progcurso
+        COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_hcurso, 
+
+        SUM(mc.curso_totalh) AS numero_de_horas
+
+        FROM   (SELECT d.doc_dni, c.curso_id, g.grupo ,c.curso_totalh, d.prog_id AS progdoc, c.prog_id AS progcurso,c.tipo_alter_salud
                 FROM docente_curso dc
                 INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
                 INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
@@ -163,15 +189,11 @@ g.grupo, c.curso_ciclo) AS count2_table
                 INNER JOIN docentes d ON d.docente_id = dc.docente_id 
                 INNER JOIN program p ON p.prog_id = c.prog_id
                 INNER JOIN program pd ON pd.prog_id = d.prog_id
-                INNER JOIN (
-                    SELECT gch_id, COUNT(*) AS hxh
-                    FROM horario
-                    GROUP BY horario.gch_id
-                ) AS hxh ON hxh.gch_id = gc.gc_id
-                ) as mc WHERE mc.progdoc != $p AND mc.progcurso=$p");
+                ) as mc WHERE mc.progdoc != $p AND mc.progcurso=$p AND mc.tipo_alter_salud = 0");
         if(count($ser) > 0){ $servicios = $ser[0]; }
 
-        $plazas = DB::select("SELECT gc.gc_prog_id,
+        $plazas = DB::select("  SELECT 
+               
         d.categoria,
         COUNT(DISTINCT d.docente_id) AS numero_de_docentes,
         COUNT(DISTINCT c.curso_id, g.grupo) AS numero_de_cursos,
@@ -181,7 +203,10 @@ g.grupo, c.curso_ciclo) AS count2_table
         INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
         INNER JOIN grupo g ON gc.cursogc_id = g.grupo_id
         INNER JOIN cursos c ON g.curso_id = c.curso_id
-        WHERE gc.gc_prog_id = $p and  d.categoria IN ('A1','A2','B1','B2','B3')
+        INNER JOIN program p ON p.prog_id = c.prog_id
+        INNER JOIN program pd ON pd.prog_id = d.prog_id  
+        
+        WHERE  d.prog_id = 9 AND  d.categoria IN ('A1','A2','B1','B2','B3')
         GROUP BY d.categoria 
         ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
 

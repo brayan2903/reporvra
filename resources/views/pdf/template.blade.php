@@ -589,14 +589,18 @@
         <tr>
             <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
             <th style="border: 1px solid grey;"><div style="text-align: center;">N° Cursos</div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;">Horas por horario</div></th>
+  
             <th style="border: 1px solid grey;"><div style="text-align: center;">Horas por curso</div></th>
+
+            <!-- <th style="border: 1px solid grey;"><div style="text-align: center;">Horas por horario</div></th> -->
         </tr>
         <tr>
             <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicios->numero_de_docentes }} </div></th>
             <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicios->numero_de_cursos }} </div></th>
+
             <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicios->numero_de_horas }} </div></th>
-            <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicios->numero_de_hcurso }} </div></th>
+            
+            <!-- <th style="border: 1px solid grey;"><div style="text-align: center;"> {{ $servicios->numero_de_hcurso }} </div></th> -->
         </tr>
     </table>
 
