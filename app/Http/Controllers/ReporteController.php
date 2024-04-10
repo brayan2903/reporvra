@@ -255,11 +255,13 @@ ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
 // sin apt
 
 
+        // $pdf = PDF::loadView('pdf.template', compact('data','principales','asociados','auxiliares','plazas','servicios','data_escuela','num_estudiantes','servicioaotros','practicahospitales','apt'));
+        // return $pdf->stream('pdf_example.pdf');
+
+
         $pdf = PDF::loadView('pdf.template', compact('data','principales','asociados','auxiliares','plazas','servicios','data_escuela','num_estudiantes','servicioaotros','practicahospitales','apt'));
-        return $pdf->stream('pdf_example.pdf');
-
-
-
+        return $pdf->stream('reporte_' . $p . '.pdf');
+        
 
         
     }

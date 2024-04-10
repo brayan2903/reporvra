@@ -540,10 +540,14 @@
     </table>
 
 
+<!-- 
 
 
+    <div style="font-size: 8pt; margin-top:15px solid-black;"> ii) PLAZAS DE CONTRATO</div> -->
 
-    <div style="font-size: 8pt; margin-top:15px;">PLAZAS DE CONTRATO</div>
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:1.5rem; margin-bottom:8px;">
+        <div><strong style="font-size: 9pt; font-weight:700;">ii) PLAZAS DE CONTRATO</strong></div>
+    </div>
     <table class="tabla-c1" style="width: 440px;; font-size:8pt; ">
         @php
             $tccontrato = 0;
@@ -588,7 +592,11 @@
     
 
 
-    <div style="font-size: 8pt; margin-top:15px;">DOCENTES SERVICIO</div>
+    <!-- <div style="font-size: 8pt; margin-top:15px;">DOCENTES SERVICIO</div> -->
+
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:1.5rem; margin-bottom:8px;">
+        <div><strong style="font-size: 9pt; font-weight:700;">iiI) DOCENTES DE SERVICIO</strong></div>
+    </div>
     <table class="tabla-c1" style="width: 350px; font-size:8pt; ">
         <tr>
             <th style="border: 1px solid grey;"><div style="text-align: center;">N° Docentes </div></th>
@@ -609,7 +617,7 @@
     </table>
 
     <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
-        <div><strong style="font-size: 10pt; font-weight:700;">c) EVALUACION DE CARGA ACADEMICA DEL PE</strong></div>
+        <div><strong style="font-size: 10pt; font-weight:700;">c) EVALUACION INICIAL DE CARGA ACADEMICA DEL PE</strong></div>
     </div>
     <table style="margin-left: -3px;  margin-top:10px;">
         <tr>
@@ -668,7 +676,12 @@
 
     </table>
 
-    <div style="font-size: 8pt; margin-top:15px;">ASIGNACION PRESUPUESTAL TEMPORAL</div>
+    <!-- <div style="font-size: 8pt; margin-top:15px;">ASIGNACION PRESUPUESTAL TEMPORAL</div> -->
+
+    <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
+        <div><strong style="font-size: 10pt; font-weight:700;">d) PLAZAS SOLICITADAS</strong></div>
+    </div>
+
     <table class="tabla-c1" style="width: 440px;; font-size:8pt; ">
         @php
             $tcapt = 0;
@@ -709,7 +722,7 @@
     </table>
 
     <div style="width: 100%; text-align:left; text-align:left; margin-top:8px; margin-bottom:8px;">
-        <div><strong style="font-size: 10pt; font-weight:700;">d) EVALUACION FINAL DE CARGA ACADEMICA DEL PE </strong></div>
+        <div><strong style="font-size: 10pt; font-weight:700;">e) EVALUACION FINAL DE CARGA ACADEMICA DEL PE </strong></div>
     </div>
 
     <table style="margin-left: -3px;  margin-top:10px;">
