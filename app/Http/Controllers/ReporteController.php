@@ -10,8 +10,7 @@ class ReporteController extends Controller
 {
     public function generatePDF($p)
     {
-        $datos = DB::select("
-        WITH cursos_filtrados AS (
+        $datos = DB::select("WITH cursos_filtrados AS (
             SELECT *
             FROM cursos
             WHERE prog_id IN ($p) and cursos.tipo_alter_salud = 0
@@ -20,7 +19,10 @@ class ReporteController extends Controller
             grupos_y_ciclos.grupo_valor,
             ciclos.ciclo_valor,
             IFNULL(count1, 0) AS num_cursos,
-            IFNULL(count2, 0) AS num_horas
+            CASE 
+                WHEN grupos_y_ciclos.grupo_valor IN ('DIRIGIDO', 'RE') THEN IFNULL(count2 * 0.5, 0)
+                ELSE IFNULL(count2, 0)
+            END AS num_horas
         FROM 
             (SELECT 'A' as grupo_valor UNION ALL
             SELECT 'B' UNION ALL
@@ -87,25 +89,24 @@ class ReporteController extends Controller
             AND ciclos.ciclo_valor = count1_table.ciclo_valor
         LEFT JOIN
             (SELECT g.grupo AS grupo_valor,
-   c.curso_ciclo AS ciclo_valor,
-   SUM(c.curso_totalh) AS count2
-FROM 
-cursos_filtrados c
-INNER JOIN 
-grupo g ON c.curso_id = g.curso_id
-INNER JOIN 
-grupo_curso gc ON g.grupo_id = gc.cursogc_id
-INNER JOIN 
-program p ON c.prog_id = p.prog_id
-GROUP BY 
-g.grupo, c.curso_ciclo) AS count2_table 
+                c.curso_ciclo AS ciclo_valor,
+                SUM(c.curso_totalh) AS count2
+            FROM 
+                cursos_filtrados c
+            INNER JOIN 
+                grupo g ON c.curso_id = g.curso_id
+            INNER JOIN 
+                grupo_curso gc ON g.grupo_id = gc.cursogc_id
+            INNER JOIN 
+                program p ON c.prog_id = p.prog_id
+            GROUP BY 
+                g.grupo, c.curso_ciclo) AS count2_table 
         ON 
             grupos_y_ciclos.grupo_valor = count2_table.grupo_valor
             AND ciclos.ciclo_valor = count2_table.ciclo_valor
         WHERE
             count1 IS NOT NULL OR count2 IS NOT NULL
-        ORDER BY ciclo_valor;
-        ");
+        ORDER BY ciclo_valor;");
 
         $data = [];
         $data_escuela = [];
@@ -173,7 +174,7 @@ g.grupo, c.curso_ciclo) AS count2_table
 
 
 
-
+// inicio  cuadro 2 programacion adicional //////   /////
         $ser = DB::select("SELECT 	
         COUNT(DISTINCT mc.doc_dni) AS numero_de_docentes,
         COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_cursos,
@@ -191,7 +192,7 @@ g.grupo, c.curso_ciclo) AS count2_table
                 INNER JOIN program pd ON pd.prog_id = d.prog_id
                 ) as mc WHERE mc.progdoc != $p AND mc.progcurso=$p AND mc.tipo_alter_salud = 0");
         if(count($ser) > 0){ $servicios = $ser[0]; }
-
+// cuadro 2 programacion adicional fin // //////////
         $plazas = DB::select("  SELECT 
                
         d.categoria,
@@ -269,17 +270,21 @@ ORDER BY CASE WHEN d.categoria LIKE 'B%' THEN 1 ELSE 2 END, d.categoria;");
     public function getDocentes($pro, $tipo){
     
         $respuesta = DB::select("SELECT 
-            COUNT(DISTINCT dc.docente_id) AS numero_de_docentes,
-            COUNT(DISTINCT c.curso_id,g.grupo) AS numero_de_cursos,
-            SUM(c.curso_totalh) AS numero_de_horas
-        FROM docentes d
-        INNER JOIN docente_curso dc ON d.docente_id = dc.docente_id
-        INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
-        /*INNER JOIN horario h ON gc.gc_id = h.gch_id*/
-        INNER JOIN grupo g ON gc.cursogc_id = g.grupo_id
-        INNER JOIN cursos c ON g.curso_id = c.curso_id
-        WHERE d.prog_id = $pro
-            AND d.dedicacion LIKE '".$tipo."%'");
+        COUNT(DISTINCT dc.docente_id) AS numero_de_docentes,
+        COUNT(DISTINCT c.curso_id,g.grupo) AS numero_de_cursos,
+        SUM(
+            CASE 
+                WHEN g.grupo IN ('DIRIGIDO', 'RE') THEN c.curso_totalh * 0.5
+                ELSE c.curso_totalh
+            END
+        ) AS numero_de_horas
+    FROM docentes d
+    INNER JOIN docente_curso dc ON d.docente_id = dc.docente_id
+    INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
+    INNER JOIN grupo g ON gc.cursogc_id = g.grupo_id
+    INNER JOIN cursos c ON g.curso_id = c.curso_id
+    WHERE d.prog_id = $pro
+                AND d.dedicacion LIKE '".$tipo."%'");
 
         if(count($respuesta) > 0){
             return $respuesta[0];
