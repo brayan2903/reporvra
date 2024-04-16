@@ -178,19 +178,32 @@ class ReporteController extends Controller
         $ser = DB::select("SELECT 	
         COUNT(DISTINCT mc.doc_dni) AS numero_de_docentes,
         COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_cursos,
-        COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_hcurso, 
-
-        SUM(mc.curso_totalh) AS numero_de_horas
-
-        FROM   (SELECT d.doc_dni, c.curso_id, g.grupo ,c.curso_totalh, d.prog_id AS progdoc, c.prog_id AS progcurso,c.tipo_alter_salud
-                FROM docente_curso dc
-                INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
-                INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
-                INNER JOIN cursos c ON c.curso_id = g.curso_id
-                INNER JOIN docentes d ON d.docente_id = dc.docente_id 
-                INNER JOIN program p ON p.prog_id = c.prog_id
-                INNER JOIN program pd ON pd.prog_id = d.prog_id
-                ) as mc WHERE mc.progdoc != $p AND mc.progcurso=$p AND mc.tipo_alter_salud = 0");
+        COUNT(DISTINCT mc.curso_id, mc.grupo) AS numero_de_hcurso,
+         SUM(
+            CASE 
+                WHEN mc.grupo IN ('DIRIGIDO', 'RE') THEN mc.curso_totalh * 0.5
+                ELSE mc.curso_totalh
+            END
+        ) AS numero_de_horas
+    
+    FROM   (
+        SELECT 
+            d.doc_dni, 
+            c.curso_id, 
+            g.grupo, 
+            c.curso_totalh, 
+            d.prog_id AS progdoc, 
+            c.prog_id AS progcurso,
+            c.tipo_alter_salud
+        FROM docente_curso dc
+        INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
+        INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
+        INNER JOIN cursos c ON c.curso_id = g.curso_id
+        INNER JOIN docentes d ON d.docente_id = dc.docente_id 
+        INNER JOIN program p ON p.prog_id = c.prog_id
+        INNER JOIN program pd ON pd.prog_id = d.prog_id
+    ) as mc 
+    WHERE mc.progdoc != $p AND mc.progcurso = $p AND mc.tipo_alter_salud = 0");
         if(count($ser) > 0){ $servicios = $ser[0]; }
 // cuadro 2 programacion adicional fin // //////////
         $plazas = DB::select("  SELECT 

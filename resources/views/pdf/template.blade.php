@@ -595,7 +595,7 @@
     <!-- <div style="font-size: 8pt; margin-top:15px;">DOCENTES SERVICIO</div> -->
 
     <div style="width: 100%; text-align:left; text-align:left; margin-top:1.5rem; margin-bottom:8px;">
-        <div><strong style="font-size: 9pt; font-weight:700;">iiI) DOCENTES DE SERVICIO</strong></div>
+        <div><strong style="font-size: 9pt; font-weight:700;">iii) DOCENTES DE SERVICIO</strong></div>
     </div>
     <table class="tabla-c1" style="width: 350px; font-size:8pt; ">
         <tr>
