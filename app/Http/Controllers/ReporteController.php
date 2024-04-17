@@ -211,7 +211,12 @@ class ReporteController extends Controller
         d.categoria,
         COUNT(DISTINCT d.docente_id) AS numero_de_docentes,
         COUNT(DISTINCT c.curso_id, g.grupo) AS numero_de_cursos,
-        SUM(c.curso_totalh) AS numero_de_horas
+        SUM(
+            CASE 
+                WHEN g.grupo IN ('DIRIGIDO', 'RE') THEN c.curso_totalh * 0.5
+                ELSE c.curso_totalh
+            END
+        ) AS numero_de_horas
         FROM docentes d
         INNER JOIN docente_curso dc ON d.docente_id = dc.docente_id
         INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
@@ -226,15 +231,31 @@ class ReporteController extends Controller
 
         $servicioaotros = DB::select("SELECT
         COUNT(c.curso_codigo) AS cantidad_cursos,
-        COALESCE(SUM(c.curso_totalh), 0) AS total_horas
-        FROM docente_curso dc
-        INNER JOIN grupo_curso gc ON gc.gc_id = dc.cursodc_id
-        INNER JOIN grupo g ON g.grupo_id = gc.cursogc_id 
-        INNER JOIN cursos c ON c.curso_id = g.curso_id
-        INNER JOIN docentes d ON d.docente_id = dc.docente_id 
-        INNER JOIN program p ON p.prog_id = c.prog_id
-        INNER JOIN program pd ON pd.prog_id = d.prog_id  
-        WHERE d.prog_id = $p AND c.prog_id != $p;");
+        COALESCE(
+            SUM(
+                CASE 
+                    WHEN g.grupo IN ('DIRIGIDO', 'RE') THEN c.curso_totalh * 0.5
+                    ELSE c.curso_totalh
+                END
+            ), 
+            0
+        ) AS total_horas
+    FROM 
+        docente_curso dc
+    INNER JOIN 
+        grupo_curso gc ON gc.gc_id = dc.cursodc_id
+    INNER JOIN 
+        grupo g ON g.grupo_id = gc.cursogc_id 
+    INNER JOIN 
+        cursos c ON c.curso_id = g.curso_id
+    INNER JOIN 
+        docentes d ON d.docente_id = dc.docente_id 
+    INNER JOIN 
+        program p ON p.prog_id = c.prog_id
+    INNER JOIN 
+        program pd ON pd.prog_id = d.prog_id  
+    WHERE 
+        d.prog_id = $p AND c.prog_id != $p;");
 
         $practicahospitales = DB::select(" SELECT 
         COALESCE(COUNT(c.curso_id), 0) AS cantidad_cursos,
@@ -254,7 +275,12 @@ $apt = DB::select("SELECT
 d.categoria,
 COUNT(DISTINCT d.docente_id) AS numero_de_docentes,
 COUNT(DISTINCT c.curso_id, g.grupo) AS numero_de_cursos,
-SUM(c.curso_totalh) AS numero_de_horas
+SUM(
+            CASE 
+                WHEN g.grupo IN ('DIRIGIDO', 'RE') THEN c.curso_totalh * 0.5
+                ELSE c.curso_totalh
+            END
+        ) AS numero_de_horas
 FROM docentes d
 INNER JOIN docente_curso dc ON d.docente_id = dc.docente_id
 INNER JOIN grupo_curso gc ON dc.cursodc_id = gc.gc_id
